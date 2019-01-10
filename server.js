@@ -8,4 +8,4 @@
 //git status
 //git ad
 //git status
-//git commit -m
+//git commit -m "Init commit"
