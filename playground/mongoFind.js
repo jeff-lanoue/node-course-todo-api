@@ -35,8 +35,8 @@ MongoClient.connect(databaseURL , (error, db) => {
     //     console.log('Unable to fetch todos : ', err);
     // });
 
-    db.collection('Users').find({name: 'Jeff'}).toArray().then((docs) => {
-            console.log('Todos');
+    db.collection('ToDo').find({Text: 'Beat the dog'}).toArray().then((docs) => {
+            console.log('Users');
             console.log(JSON.stringify(docs, undefined, 2));
     }, (err) => {
         console.log('Unable to fetch todos : ', err);
