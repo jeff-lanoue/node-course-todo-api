@@ -2,6 +2,9 @@
 // npm init
 // npm install mongodb --save
 
+// WHEN MODULES INSTALL WITH ERRORS AND DONT
+// GET ADDED TO THE PACKAGE.JSON FILE ...
+// USE :: npm cache verify 
 
 //make a new repository
 //git init

@@ -1,36 +1,33 @@
-//npm i mongoose
+//npm i express body-parser --save
+var express = require('express');
+var bodyParser = require('body-parser');
 
-var mongoose = require('mongoose');
+var {mongoose} = require('./db/mongoose');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/ToDoApp', { useNewUrlParser: true });
+var app = express();
 
-var Todo = mongoose.model('Todo' , {
-    text: {type: String},
-    completed: {type: Boolean},
-    completedAt: {type: Number}
+//config middleware 
+app.use(bodyParser.json());
+
+app.post('/todos', (req, res) => {
+    console.log(req.body);
+    var todo = new Todo({
+        text: req.body.text,
+        completed: req.body.completed,
+        completedAt: req.body.completedAt
+    });
+
+    todo.save().then((doc) => {
+        res.send(doc);
+    }, (e) => {
+        res.status(400).send(e);
+    });
 });
 
 
-var newTodo = new Todo({
-    text: 'Do cardio workout'
+app.listen(3000, () => {
+    console.log(`Listening on port 3000`);
 });
 
-newTodo.save().then((doc) => {
-    console.log(`Saved todo : ${doc}`);
-}, (err) => {
-    console.log(`Unable to save todo ${err}`);
-});
-
-
-var anotherTodo = new Todo({
-    text: 'Add an alternate todo',
-    completed: true,
-    completedAt: 548878554
-});
-
-anotherTodo.save().then((doc) => {
-   console.log(`Saved todo : ${JSON.stringify(doc, undefined, 4)}`);
-}, (err) => {
-   console.log(`Unable to save todo ${err}`);
-});
