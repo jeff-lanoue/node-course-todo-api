@@ -18,3 +18,6 @@
 //an area where I can copy the two lines needed tu
 //put the code there. After that I just need to do
 // git add . , git commit -m "New mesage" ,and git push.
+
+
+//"test": "SET NODE_ENV=test|| export NODE_ENV=text&& mocha server/**/*.test.js",

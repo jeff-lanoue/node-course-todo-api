@@ -1,4 +1,7 @@
-//npm i express body-parser --save
+var en = require('./config/config');
+
+console.log(process.env.MONGODB_URI);
+
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,7 +13,7 @@ var {User} = require('./models/user');
 
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 //config middleware 
 app.use(bodyParser.json());
@@ -94,7 +97,7 @@ app.patch('/todos/:id' , (req, res) => {
         body.completedAt = null;
     }
 
-    Todo.findOneAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+    Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
         if(!todo) {
             return res.status(400).send();
         }
